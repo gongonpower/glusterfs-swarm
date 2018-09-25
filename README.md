@@ -30,7 +30,7 @@ In any one manager node of the docker swarm, issue command:
 docker network create -d overlay --attachable netgfs
 ```
 "-d overlay" option means container can communication across different nodes.
-"--attachable" option means that overlay network is restricted to be used by swarm managed container by default. "attachable" option allow individaul container to use the overlay network also.
+"--attachable" option means that since overlay network is restricted to be used by swarm managed container by default, "attachable" option allow individual container to use the overlay network also.
 
 ## Step 3: mount directory at host level first
 at all the 3 nodes, issue my-temp-mount.sh to mount the /datavol as the share folder
@@ -174,7 +174,7 @@ at Step3 and Step6, we need to mount the volume at node level and container leve
 for step 3, we can use /etc/fstab. For step 6, we use another container to do.
 
 ### For step 3:
-at each node, att "/datavol                /datavol                none    bind,make-shared        0 0" to fstab. it looks below:
+at each node, add "/datavol                /datavol                none    bind,make-shared        0 0" to fstab. it looks below:
 ```
 [root@qry-01-dev etc]# cat fstab
 
