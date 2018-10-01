@@ -1,4 +1,5 @@
 #!/bin/bash
+trap "umount /datavol;exit 0" SIGKILL SIGTERM SIGHUP SIGINT EXIT
 while true; do
   mount.glusterfs $1:/gv0 /datavol
   if [ $? -eq 0 ]
@@ -7,4 +8,4 @@ while true; do
   fi
   sleep 1
 done
-tail -f /etc/passwd > /dev/null
+while true; do :; done
