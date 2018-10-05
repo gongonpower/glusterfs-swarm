@@ -8,4 +8,4 @@ while true; do
   fi
   sleep 1
 done
-while true; do :; done
+while true; do sleep 2; done
