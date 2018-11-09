@@ -61,9 +61,6 @@ At docker node 3 :
 ```
 run-gfs-srv3.sh
 ```
-### Tips : Why not use docker-compose yml format?
-When using yml format to run a container, the container name will be the format "xxx_yyy". The name has an undersore inside. glusterfs treats this name as invalid and refuse to perform any action e.g.(gluster peer probe gfsc1). The only way is used docker run to create a container with the name we wanted.
-
 
 ## Step 5: join the 3 nodes to cluster and create  glusterfs volume
 enter any one glusterfs container to join nodes to the gfs cluster and then create glusterfs volume.
