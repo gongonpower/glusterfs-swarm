@@ -61,6 +61,13 @@ At docker node 3 :
 ```
 run-gfs-srv3.sh
 ```
+### Tips : Pay attention to the container name format 
+When using docker-compose to run a container by an yml file, the default container name may be in the format "xxx_yyy". The name has an undersore inside. glusterfs treats this name as an invalid dns name and refuse to perform any action e.g.(gluster peer probe 
+gfsc1). So if yml file is used, it is needed to use "container_name" option to assign a custom name without underscore inside.
+
+Reference:
+- (https://docs.docker.com/compose/compose-file/)
+
 
 ## Step 5: join the 3 nodes to cluster and create  glusterfs volume
 enter any one glusterfs container to join nodes to the gfs cluster and then create glusterfs volume.
@@ -186,7 +193,7 @@ Reference:
 - [Improving the Linux mount utility](http://dirkgerrits.com/publications/mount.pdf)
 
 ### For step 6:
-we use another container as a middle man container to mount the mount the volume when the this container start
+we use another container as a middle-man container to mount the volume when the container start
 at each node, run corresponding run-mount-client.sh script. e.g. node 1 run run-mount-client1.sh, node 2 run run-mount-client2.sh ...
 ```
 [root@qry-01-dev glusterfs]# cd client/
@@ -214,6 +221,8 @@ test1.txt
 ```
 
 ## How to unmount the share directory (e.g. /datavol)
+By default, when the middle-man mount volume container (gfsm1, gfsm2, gfsm3) is stopped, the mount volume is also unmounted automatically. But if unmount action is failed, we can unmount it manually. The steps are as below:
+
 At the desired node, stop the middle man container and then issue umount command.
 
 e.g. at node1 
